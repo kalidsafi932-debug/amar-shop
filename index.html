@@ -72,6 +72,68 @@
 
         html, body { transition: background-color 0.35s ease, color 0.35s ease; }
 
+        @keyframes whatsappGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 0 14px 4px rgba(37, 211, 102, 0.55);
+            }
+            50% {
+                box-shadow: 0 0 0 16px rgba(37, 211, 102, 0), 0 0 26px 10px rgba(37, 211, 102, 0.9);
+            }
+        }
+
+        @keyframes whatsappShine {
+            0% { transform: translateX(-140%) rotate(25deg); }
+            55%, 100% { transform: translateX(180%) rotate(25deg); }
+        }
+
+        .floating-whatsapp-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #34e57a, #1fb855 70%);
+            color: #ffffff;
+            font-size: 28px;
+            text-decoration: none;
+            z-index: 2500;
+            overflow: hidden;
+            animation: whatsappGlow 2.2s ease-in-out infinite;
+            transition: var(--transition);
+        }
+
+        .floating-whatsapp-btn::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -70%;
+            width: 45%;
+            height: 220%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: whatsappShine 2.6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-whatsapp-btn i { position: relative; z-index: 1; }
+
+        .floating-whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp-btn {
+                right: 16px;
+                bottom: 16px;
+                width: 52px;
+                height: 52px;
+                font-size: 25px;
+            }
+        }
+
         .theme-toggle-btn {
             background: var(--surface-alt-2);
             color: var(--dark);
@@ -1277,6 +1339,35 @@
             border-color: #0b1120;
         }
 
+        .btn-whatsapp-msg {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-whatsapp-msg i { font-size: 17px; }
+
+        .btn-whatsapp-msg:hover {
+            background: #128c7e;
+        }
+
+        @media (max-width: 600px) {
+            .product-actions { flex-wrap: wrap; }
+            .btn-whatsapp-msg { flex: 1 1 100%; }
+        }
+
         footer {
             background: var(--gradient-dark);
             color: var(--white);
@@ -1726,7 +1817,7 @@
             <div class="form-group"><label>Telegram লিংক:</label><input type="text" id="inputTelegramLink" placeholder="https://t.me/yourchannel"></div>
             <div class="form-group"><label>LinkedIn লিংক:</label><input type="text" id="inputLinkedinLink" placeholder="https://linkedin.com/in/yourprofile"></div>
             <div class="form-group"><label>Google Ads লিংক:</label><input type="text" id="inputGoogleAdsLink" placeholder="https://ads.google.com/"></div>
-            <div class="form-group"><label>WhatsApp লিংক:</label><input type="text" id="inputWhatsappLink" placeholder="https://wa.me/8801XXXXXXXXX"></div>
+            <div class="form-group"><label>WhatsApp নম্বর বা লিংক:</label><input type="text" id="inputWhatsappLink" placeholder="যেমন: 8801XXXXXXXXX অথবা https://wa.me/8801XXXXXXXXX"></div>
 
             <button class="save-settings-btn" onclick="saveSettings()">সেভ করুন</button>
         </div>
@@ -1814,6 +1905,7 @@
                 <div class="product-actions">
                     <button class="btn-buy-now" onclick="openCheckoutModal()">Buy Now</button>
                     <button class="btn-add-cart" onclick="addToCartCurrentProduct()">Add to Cart</button>
+                    <button class="btn-whatsapp-msg" id="productMessageBtn" style="display:none;" onclick="messageOnWhatsapp()"><i class="fa-brands fa-whatsapp"></i> মেসেজ করুন</button>
                 </div>
 
                 <div class="product-desc" id="modalDesc">
@@ -1899,6 +1991,7 @@
                 </div>
 
                 <button class="save-settings-btn" onclick="submitOrder()">সেভ করুন</button>
+                <button class="btn-whatsapp-msg" id="checkoutMessageBtn" style="display:none; width:100%; justify-content:center; margin-top:12px;" onclick="messageOnWhatsapp()"><i class="fa-brands fa-whatsapp"></i> অর্ডার নিয়ে মেসেজ করুন</button>
             </div>
         </div>
     </div>
@@ -2013,6 +2106,10 @@
             </div>
         </div>
     </footer>
+
+    <a href="#" id="floatingWhatsappBtn" class="floating-whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp-এ মেসেজ করুন" title="WhatsApp-এ মেসেজ করুন">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <script>
         let defaultProducts = [
@@ -3264,16 +3361,63 @@
             ['instagramLink', 'telegramLink', 'linkedinLink', 'googleAdsLink', 'whatsappLink'].forEach(function(key) { localStorage.setItem('saved' + key, settings[key] || ''); });
         }
 
+        let currentWhatsappLink = '';
+
+        function normalizeWhatsappLink(value) {
+            if(!value) return '';
+            const trimmed = String(value).trim();
+            if(!trimmed) return '';
+            if(/^https?:\/\//i.test(trimmed)) return trimmed;
+            const digits = trimmed.replace(/[^\d]/g, '');
+            if(!digits) return '';
+            return 'https://wa.me/' + digits;
+        }
+
+        function messageOnWhatsapp() {
+            if(!currentWhatsappLink) {
+                alert('মেসেজ পাঠাতে আগে দোকান মালিককে সেটিংসে WhatsApp নম্বর যুক্ত করতে হবে।');
+                return;
+            }
+            const name = (currentProduct && currentProduct.name) ? currentProduct.name : '';
+            const price = (currentProduct && currentProduct.price) ? (currentProduct.price.toLocaleString('bn-BD') + ' ৳') : '';
+            const qty = (currentProduct && currentProduct.qty) ? currentProduct.qty : 1;
+            let text = 'আসসালামু আলাইকুম, আমি এই পণ্যটি সম্পর্কে জানতে চাই।';
+            if(name) text += `\nপণ্য: ${name}`;
+            if(price) text += `\nদাম: ${price}`;
+            if(qty) text += `\nপরিমাণ: ${qty}`;
+            const separator = currentWhatsappLink.includes('?') ? '&' : '?';
+            window.open(currentWhatsappLink + separator + 'text=' + encodeURIComponent(text), '_blank');
+        }
+
         function applySocialLinks(youtubeLink, facebookLink, instagramLink, telegramLink, linkedinLink, googleAdsLink, whatsappLink) {
+            const normalizedWhatsapp = normalizeWhatsappLink(whatsappLink);
+            currentWhatsappLink = normalizedWhatsapp;
             const links = {
                 'link-youtube': youtubeLink, 'link-facebook': facebookLink, 'link-instagram': instagramLink,
-                'link-telegram': telegramLink, 'link-linkedin': linkedinLink, 'link-googleads': googleAdsLink, 'link-whatsapp': whatsappLink
+                'link-telegram': telegramLink, 'link-linkedin': linkedinLink, 'link-googleads': googleAdsLink, 'link-whatsapp': normalizedWhatsapp
             };
             Object.keys(links).forEach(function(id) {
                 const button = document.getElementById(id), link = links[id];
                 button.href = link || '#';
                 button.style.display = link ? 'inline-flex' : 'none';
             });
+
+            // ওয়েবসাইটের যেকোনো পেজে সবাই দেখতে পাবে এমন ভাসমান WhatsApp বাটন
+            const floatingBtn = document.getElementById('floatingWhatsappBtn');
+            if(floatingBtn) {
+                if(normalizedWhatsapp) {
+                    floatingBtn.href = normalizedWhatsapp;
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.style.display = 'none';
+                }
+            }
+
+            // পণ্য কেনা/অর্ডার করার সময় "মেসেজ করুন" বাটন — সবাই দেখতে পাবে
+            const productMsgBtn = document.getElementById('productMessageBtn');
+            if(productMsgBtn) productMsgBtn.style.display = normalizedWhatsapp ? 'inline-flex' : 'none';
+            const checkoutMsgBtn = document.getElementById('checkoutMessageBtn');
+            if(checkoutMsgBtn) checkoutMsgBtn.style.display = normalizedWhatsapp ? 'inline-flex' : 'none';
         }
 
         function updateLogo(logoSrc, shopName) {
