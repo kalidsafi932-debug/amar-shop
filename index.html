@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="Anjaujs7nebEMNk7XuCTcJa29xT03noUbgokhh0vz28" />
-    <title>অর্গানিক বাজার নাটোর - অনলাইন শপিং</title>
-    <meta name="description" content="অর্গানিক বাজার নাটোর থেকে সেরা মানের পণ্য কিনুন সহজে, দ্রুত ডেলিভারি ও ক্যাশ অন ডেলিভারি সুবিধাসহ।">
+    <title>আমার শপ - আল্ট্রা প্রিমিয়াম মার্কেটপ্লেস</title>
+    <meta name="description" content="আমার শপ থেকে সেরা মানের পণ্য কিনুন সহজে, দ্রুত ডেলিভারি ও ক্যাশ অন ডেলিভারি সুবিধাসহ।">
     <!-- ফেসবুক/হোয়াটসঅ্যাপে লিংক শেয়ার করলে প্রিভিউ দেখানোর জন্য (Open Graph) -->
-    <meta property="og:title" content="অর্গানিক বাজার নাটোর - অনলাইন শপিং">
-    <meta property="og:description" content="অর্গানিক বাজার নাটোর থেকে সেরা মানের পণ্য কিনুন সহজে, দ্রুত ডেলিভারি ও ক্যাশ অন ডেলিভারি সুবিধাসহ।">
+    <meta property="og:title" content="আমার শপ - আল্ট্রা প্রিমিয়াম মার্কেটপ্লেস">
+    <meta property="og:description" content="আমার শপ থেকে সেরা মানের পণ্য কিনুন সহজে, দ্রুত ডেলিভারি ও ক্যাশ অন ডেলিভারি সুবিধাসহ।">
     <meta property="og:type" content="website">
     <!-- TODO: এখানে আপনার লোগো/কভার ছবির লিংক দিন, যেমন: https://yourdomain.com/logo.png -->
     <meta property="og:image" content="">
     <!-- ব্রাউজার ট্যাবের আইকন (favicon) — TODO: আপনার লোগো ফাইলের লিংক/পাথ বসান -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
     <!-- গুগল ফন্ট: Hind Siliguri -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- ফন্ট অসাম আইকনস -->
@@ -229,6 +228,32 @@
         }
 
         .search-bar button:hover { opacity: 0.9; }
+
+        .search-clear-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            margin: auto 6px;
+            border: none;
+            border-radius: 50%;
+            background: var(--surface-alt);
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            flex: none;
+        }
+
+        .search-clear-btn.show { display: flex; }
+        .search-clear-btn:hover { background: var(--primary); color: #ffffff; }
+
+        .search-results-note {
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 4px;
+        }
 
         .nav-actions {
             display: flex;
@@ -1381,6 +1406,54 @@
         .footer-social-links a.whatsapp:hover { background: #128c7e; border-color: #128c7e; }
         .footer-social-links a.googleads:hover { background: linear-gradient(135deg, #4285f4, #fbbc05); border-color: #fbbc05; }
 
+        .footer-payment-bar {
+            width: 92%;
+            max-width: 1300px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 22px;
+            padding-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-payment-bar .payment-title {
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .payment-methods-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .payment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: .2px;
+            box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.4);
+        }
+
+        .payment-badge i { font-size: 15px; }
+
+        .payment-badge.bkash { background: #e2136e; }
+        .payment-badge.nagad { background: linear-gradient(135deg, #f6921e, #ec1c24); }
+        .payment-badge.rocket { background: #8c3494; }
+        .payment-badge.cod { background: #334155; }
+        .payment-badge.visa { background: #1a1f71; }
+        .payment-badge.mastercard { background: #f79e1b; color: #1a1f2e; }
+
         .footer-social-links a i {
             font-size: 17px;
             transition: transform 0.3s ease;
@@ -1555,7 +1628,7 @@
     <div class="top-utility">
         <div class="top-container">
             <span><i class="fa-solid fa-phone"></i> হটলাইন: +৮৮০ ১৭০০-০০০০০০</span>
-            <span id="shop-name-top">অর্গানিক বাজার নাটোর</span>-এর পক্ষ থেকে সারা দেশে দ্রুত ক্যাশ অন ডেলিভারি!
+            <span id="shop-name-top">আমার শপ</span>-এর পক্ষ থেকে সারা দেশে দ্রুত ক্যাশ অন ডেলিভারি!
         </div>
     </div>
 
@@ -1567,7 +1640,8 @@
             </a>
             
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="অর্গানিক বাজার নাটোর-এ আপনার পছন্দের পণ্য খুঁজুন..." oninput="handleSearch(this.value)">
+                <input type="text" id="search-input" placeholder="আমার শপ-এ আপনার পছন্দের পণ্য খুঁজুন..." oninput="handleSearch(this.value)">
+                <button type="button" class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()" aria-label="সার্চ মুছুন"><i class="fa-solid fa-xmark"></i></button>
                 <button><i class="fa-solid fa-search"></i></button>
             </div>
 
@@ -1611,7 +1685,7 @@
             
             <div class="form-group">
                 <label>শপের নাম:</label>
-                <input type="text" id="inputShopName" value="অর্গানিক বাজার নাটোর">
+                <input type="text" id="inputShopName" value="আমার শপ">
             </div>
 
             <div class="form-group">
@@ -1849,7 +1923,7 @@
             </div>
         </div>
 
-        <div class="hero-categories-box">
+        <div class="hero-categories-box" id="heroCategoriesBox">
             <h3><i class="fa-solid fa-list"></i> ক্যাটাগরি সমূহ</h3>
             <ul class="category-list">
                 <li class="category-item"><a onclick="filterCategory('all')" id="cat-all" class="active-category"><i class="fa-solid fa-border-all"></i> সকল পণ্য <i class="fa-solid fa-chevron-right"></i></a></li>
@@ -1860,9 +1934,9 @@
             </ul>
         </div>
 
-        <section class="hero-section">
+        <section class="hero-section" id="heroSection">
             <div class="hero-text">
-                <span class="hero-tag" id="hero-tag-text">অর্গানিক বাজার নাটোর এক্সক্লুসিভ</span>
+                <span class="hero-tag" id="hero-tag-text">আমার শপ এক্সক্লুসিভ</span>
                 <h1>সেরা মানের প্রিমিয়াম পণ্য এখন এক ঠিকানায়</h1>
                 <p>আপনার ঘরের স্বাচ্ছন্দ্য এবং ফ্যাশনেবল লুকের জন্য বেছে নিন আমাদের শতভাগ অরিজিনাল ও ভেরিফাইড প্রোডাক্টগুলো।</p>
                 <a href="#products" class="btn-main">অর্ডার করুন <i class="fa-solid fa-arrow-right"></i></a>
@@ -1875,6 +1949,7 @@
     <main class="main-container" id="products">
         <div class="section-header">
             <h2 id="sectionTitle">জনপ্রিয় পণ্যসমূহ</h2>
+            <p class="search-results-note" id="searchResultsNote" style="display:none;"></p>
         </div>
 
         <div class="product-grid" id="productGrid"></div>
@@ -1883,7 +1958,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-col">
-                <h3 id="footer-shop-name">অর্গানিক বাজার নাটোর</h3>
+                <h3 id="footer-shop-name">আমার শপ</h3>
                 <p>আমরা গ্রাহকদের দিচ্ছি ঝামেলাহীন অনলাইন শপিং অভিজ্ঞতা, দ্রুততম ডেলিভারি এবং মানসম্মত পণ্যের নিশ্চয়তা।</p>
             </div>
             <div class="footer-col">
@@ -1910,7 +1985,7 @@
             </div>
         </div>
         <div class="copyright-bar">
-            <p>&copy; ২০২৬ <span id="footer-copy-name">অর্গানিক বাজার নাটোর</span>। সর্বস্বত্ব সংরক্ষিত।</p>
+            <p>&copy; ২০২৬ <span id="footer-copy-name">আমার শপ</span>। সর্বস্বত্ব সংরক্ষিত।</p>
             
             <div class="footer-social-wrapper">
                 <div class="follow-us-title">Follow Us</div>
@@ -1923,6 +1998,18 @@
                     <a href="#" id="link-googleads" class="googleads" target="_blank"><i class="fa-brands fa-google"></i> Google Ads</a>
                     <a href="#" id="link-whatsapp" class="whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                 </div>
+            </div>
+        </div>
+
+        <div class="footer-payment-bar">
+            <span class="payment-title">Payment Methods:</span>
+            <div class="payment-methods-list">
+                <span class="payment-badge bkash"><i class="fa-solid fa-wallet"></i> বিকাশ</span>
+                <span class="payment-badge nagad"><i class="fa-solid fa-wallet"></i> নগদ</span>
+                <span class="payment-badge rocket"><i class="fa-solid fa-wallet"></i> রকেট</span>
+                <span class="payment-badge cod"><i class="fa-solid fa-money-bill-wave"></i> ক্যাশ অন ডেলিভারি</span>
+                <span class="payment-badge visa"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                <span class="payment-badge mastercard"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
             </div>
         </div>
     </footer>
@@ -2167,13 +2254,21 @@
                 if(allProducts.length === 0 && snapshot.metadata.fromCache === false) {
                     allProducts = [...defaultProducts];
                 }
-                renderProducts(getVisibleProducts());
+                if(isSearchActive) {
+                    handleSearch(document.getElementById('search-input').value);
+                } else {
+                    renderProducts(getVisibleProducts());
+                }
                 // URL থেকে পণ্য খোলা (শুধু প্রথমবার)
                 if(!_urlProductOpened) { _urlProductOpened = true; openProductFromURL(); }
             }, function(error) {
                 console.error("Firestore error:", error);
                 allProducts = [...defaultProducts];
-                renderProducts(getVisibleProducts());
+                if(isSearchActive) {
+                    handleSearch(document.getElementById('search-input').value);
+                } else {
+                    renderProducts(getVisibleProducts());
+                }
                 if(!_urlProductOpened) { _urlProductOpened = true; openProductFromURL(); }
             });
         }
@@ -2442,6 +2537,43 @@
             }
         }
 
+        function saveProductData(editIndex, name, desc, catKey, catName, price, visibility, images, videos) {
+            const productObj = {
+                name: name,
+                price: price,
+                oldPrice: (price + 300) + ' ৳',
+                images: images,
+                videos: videos,
+                category: catKey,
+                categoryName: catName,
+                discount: "-১০%",
+                rating: '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span>(১)</span>',
+                desc: desc,
+                visibility: visibility,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if(editIndex > -1 && allProducts[editIndex] && allProducts[editIndex].firestoreId) {
+                db.collection('products').doc(allProducts[editIndex].firestoreId).update(productObj)
+                    .then(function() {
+                        alert("পণ্য সফলভাবে এডিট ও আপডেট করা হয়েছে!");
+                    })
+                    .catch(function(err) {
+                        alert("এডিট করতে সমস্যা হয়েছে: " + err.message);
+                    });
+            } else {
+                db.collection('products').add(productObj)
+                    .then(function() {
+                        alert("আপনার পণ্যটি সফলভাবে প্রকাশিত হয়েছে এবং এখন গোটা পৃথিবীর সবাই দেখতে পাবে!");
+                    })
+                    .catch(function(err) {
+                        alert("প্রকাশ করতে সমস্যা হয়েছে: " + err.message);
+                    });
+            }
+
+            closeSellModal();
+        }
+
         // Firestore has a 1 MB document limit. Compress uploaded images before publishing.
         function compressProductImage(source) {
             if (!String(source).startsWith('data:image/')) return Promise.resolve(source);
@@ -2513,6 +2645,15 @@
 
         function filterCategory(catKey) {
             currentFilterCategory = catKey;
+            const searchInput = document.getElementById('search-input');
+            if(searchInput && searchInput.value.trim() !== '') {
+                searchInput.value = '';
+                document.getElementById('searchClearBtn').classList.remove('show');
+                document.getElementById('heroSection').style.display = '';
+                document.getElementById('heroCategoriesBox').style.display = '';
+                document.getElementById('searchResultsNote').style.display = 'none';
+                isSearchActive = false;
+            }
             const links = document.querySelectorAll('.category-list a');
             links.forEach(l => l.classList.remove('active-category'));
             event.currentTarget.classList.add('active-category');
@@ -2531,15 +2672,54 @@
             renderProducts(getVisibleProducts());
         }
 
+        let isSearchActive = false;
+
         function handleSearch(query) {
             const q = query.trim().toLowerCase();
-            const visibleList = getVisibleProducts();
+            const clearBtn = document.getElementById('searchClearBtn');
+            const heroSection = document.getElementById('heroSection');
+            const heroCategoriesBox = document.getElementById('heroCategoriesBox');
+            const sectionTitle = document.getElementById('sectionTitle');
+            const searchNote = document.getElementById('searchResultsNote');
+
             if(q === "") {
-                renderProducts(visibleList);
+                // সার্চ খালি হলে স্বাভাবিক (ব্যানার + ক্যাটাগরি) ভিউ ফিরিয়ে দিন
+                isSearchActive = false;
+                clearBtn.classList.remove('show');
+                heroSection.style.display = '';
+                heroCategoriesBox.style.display = '';
+                searchNote.style.display = 'none';
+                sectionTitle.innerText = currentFilterCategory === 'all' ? 'জনপ্রিয় পণ্যসমূহ' : sectionTitle.innerText;
+                renderProducts(getVisibleProducts());
                 return;
             }
-            const filtered = visibleList.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+
+            // সার্চ চালু থাকলে ব্যানার ও ক্যাটাগরি লুকিয়ে শুধু সার্চ ফলাফল দেখান
+            isSearchActive = true;
+            clearBtn.classList.add('show');
+            heroSection.style.display = 'none';
+            heroCategoriesBox.style.display = 'none';
+
+            // সার্চ পুরো ক্যাটালগ জুড়ে চলবে, শুধুমাত্র বর্তমান ক্যাটাগরি ফিল্টারে সীমাবদ্ধ থাকবে না
+            const filtered = allProducts.filter(function(p) {
+                const name = (p.name || '').toLowerCase();
+                const desc = (p.desc || '').toLowerCase();
+                return name.includes(q) || desc.includes(q);
+            });
+
+            sectionTitle.innerText = 'সার্চ ফলাফল';
+            searchNote.style.display = 'block';
+            searchNote.innerText = filtered.length > 0
+                ? `"${query.trim()}" এর জন্য ${filtered.length}টি পণ্য পাওয়া গেছে`
+                : `"${query.trim()}" এর জন্য কোনো পণ্য পাওয়া যায়নি`;
+
             renderProducts(filtered);
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            handleSearch('');
         }
 
         function renderProducts(items) {
@@ -2778,7 +2958,39 @@
             document.getElementById('summaryTotal').innerText = (itemTotal + currentProduct.deliveryCharge).toLocaleString('bn-BD') + ' ৳';
         }
 
-        // Saves every order in Firestore, with a local-storage fallback if the connection fails.
+        function submitOrder() {
+            const nameField = document.getElementById('chkName');
+            const phoneField = document.getElementById('chkPhone');
+            const regionField = document.getElementById('chkRegion');
+            const cityField = document.getElementById('chkCity');
+            const addressField = document.getElementById('chkAddress');
+            const placeTypeField = document.getElementById('chkPlaceType');
+
+            const fields = [nameField, phoneField, regionField, cityField, addressField, placeTypeField];
+            let hasError = false;
+
+            fields.forEach(field => {
+                if(!field.value.trim()) {
+                    field.classList.add('error-input');
+                    hasError = true;
+                } else {
+                    field.classList.remove('error-input');
+                }
+            });
+
+            if(hasError) {
+                alert("দয়া করে ডেলিভারি ইনফরমেশনের সবগুলো ঘর পূরণ করুন!");
+                return;
+            }
+
+            const totalAmount = (currentProduct.price * currentProduct.qty) + currentProduct.deliveryCharge;
+
+            alert(`ধন্যবাদ ${nameField.value}! আপনার অর্ডারটি সফলভাবে সেভ হয়েছে।\n\nপণ্যের বিবরণ: ${currentProduct.name} (${currentProduct.qty}টি)\nমোট খরচ: ${totalAmount.toLocaleString('bn-BD')} ৳\nঠিকানা: ${addressField.value}, ${cityField.value}, ${regionField.value} (${placeTypeField.value})`);
+            
+            closeCheckoutModal();
+        }
+
+        // This declaration replaces the earlier checkout handler and saves every order in Firestore.
         function submitOrder() {
             const nameField = document.getElementById('chkName');
             const phoneField = document.getElementById('chkPhone');
@@ -2907,7 +3119,56 @@
             }, 5000);
         }
 
-        // Saves text settings in Firestore so they remain available after refresh and on other devices.
+        function saveSettings() {
+            if (!requireOwner()) return;
+            const shopName = document.getElementById('inputShopName').value;
+            const hidePublicLogin = document.getElementById('inputPublicLoginToggle').checked;
+            const logoFile = document.getElementById('inputLogoFile').files[0];
+            const bannerFiles = document.getElementById('inputBannerFiles').files;
+            const youtubeLink = document.getElementById('inputYoutubeLink').value.trim();
+            const facebookLink = document.getElementById('inputFacebookLink').value.trim();
+
+            localStorage.setItem('savedShopName', shopName);
+            localStorage.setItem('hidePublicLogin', hidePublicLogin ? 'true' : 'false');
+            localStorage.setItem('savedYoutubeLink', youtubeLink);
+            localStorage.setItem('savedFacebookLink', facebookLink);
+            applySocialLinks(youtubeLink, facebookLink);
+
+            applySettings(shopName);
+            checkOwnerLoginState();
+
+            if (logoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('savedLogo', e.target.result);
+                    updateLogo(e.target.result, shopName);
+                }
+                reader.readAsDataURL(logoFile);
+            }
+
+            if (bannerFiles.length > 0) {
+                let loadedImages = [];
+                let filesProcessed = 0;
+
+                Array.from(bannerFiles).forEach((file) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        loadedImages.push(e.target.result);
+                        filesProcessed++;
+                        if (filesProcessed === bannerFiles.length) {
+                            localStorage.setItem('savedBanners', JSON.stringify(loadedImages));
+                            initSlider(loadedImages);
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            alert("সেটিংস সফলভাবে সংরক্ষিত হয়েছে!");
+            closeSettings();
+        }
+
+        // Save text settings in Firestore so they remain available after refresh and on other devices.
         function saveSettings() {
             if (!requireOwner()) return;
             const shopName = document.getElementById('inputShopName').value.trim();
@@ -3043,7 +3304,7 @@
             document.getElementById('inputWhatsappLink').value = savedWhatsappLink;
 
             if(savedLogo) {
-                updateLogo(savedLogo, savedShopName || "অর্গানিক বাজার নাটোর");
+                updateLogo(savedLogo, savedShopName || "আমার শপ");
             }
 
             if(savedBanners) initSlider(JSON.parse(savedBanners));
